@@ -1,6 +1,13 @@
 from fastapi import FastAPI
 from auth_routes import auth_routher
 from order_routes import order_routher
+from fastapi_jwt_auth import AuthJWT
+from schemas import Loginmodel, Settings
+
+
+@AuthJWT.load_config
+def get_config():
+    return Settings()
 
 
 app = FastAPI()
@@ -15,4 +22,4 @@ async def root():
 
 if __name__ == '__main__':
     import uvicorn
-    uvicorn.run(app) # uvicorn main:app --reload (terminalda ishga tushirish uchun)
+    uvicorn.run(app)
